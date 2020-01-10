@@ -18,7 +18,9 @@ class DocumentTreePanel extends React.PureComponent {
 
   constructor() {
     super();
+    debugger;
     this.listRef = React.createRef();
+    alert(JSON.stringify(window.CoreControls.arguments));
   }
 
   componentDidMount() {
