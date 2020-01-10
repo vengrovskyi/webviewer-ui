@@ -134,6 +134,7 @@ export const setActiveLeftPanel = dataElement => (dispatch, getState) => {
       'notesPanel',
       'layersPanel',
       'bookmarksPanel',
+      'documentTreePanel',
     ].join(', ');
     console.warn(
       `${dataElement} is not recognized by the left panel. Please use one of the following options: ${panelDataElements}`,

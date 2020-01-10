@@ -10,6 +10,7 @@ import BookmarksPanel from 'components/BookmarksPanel';
 import LayersPanel from 'components/LayersPanel';
 import CustomElement from 'components/CustomElement';
 import Icon from 'components/Icon';
+import DocumentTreePanel from 'components/DocumentTreePanel';
 
 import { isTabletOrMobile, isIE, isIE11 } from 'helpers/device';
 import actions from 'actions';
@@ -68,6 +69,7 @@ const LeftPanel = () => {
       <OutlinesPanel display={getDisplay('outlinesPanel')} />
       <BookmarksPanel display={getDisplay('bookmarksPanel')} />
       <LayersPanel display={getDisplay('layersPanel')} />
+      <DocumentTreePanel display={getDisplay('documentTreePanel')} />
 
       {customPanels.map(({ panel }, index) => (
         <CustomElement
