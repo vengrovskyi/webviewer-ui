@@ -18,10 +18,10 @@ class DocumentTreePanel extends React.PureComponent {
 
   constructor() {
     super();
-    debugger;
+    
     this.listRef = React.createRef();
-    alert(JSON.stringify(window.CoreControls.arguments));
-  }
+    debugger;
+   }
 
   componentDidMount() {
     core.addEventListener('beginRendering', this.onBeginRendering);
@@ -40,12 +40,14 @@ class DocumentTreePanel extends React.PureComponent {
   }
 
   onFinishedRendering = needsMoreRendering => {
-
+    //debugger;
+    //var a = window.readerControl.getCustomData();
+    alert(window.readerControl.getCustomData());
   }
 
 
   onWindowResize = () => {
-
+    alert(window.readerControl.getCustomData());
   }
 
   render() {

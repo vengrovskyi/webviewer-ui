@@ -21,6 +21,8 @@
     "autolinker": "^3.11.1",
     "classnames": "^2.2.6",
     "dayjs": "^1.8.17",
+    "devextreme": "19.2.5",
+    "devextreme-react": "19.2.5",
     "file-saver": "git+https://github.com/ZhijieZhang/FileSaver.js.git",
     "hotkeys-js": "^3.7.3",
     "i18next": "^19.0.1",
