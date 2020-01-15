@@ -83,7 +83,19 @@ module.exports = {
       {
         test: /\.svg$/,
         use: ['svg-inline-loader'],
+        exclude: path.resolve(__dirname, 'node_modules'),
       },
+      { 
+        test: /\.css$/,
+        use: [
+          { loader: "style-loader" },
+          { loader: "css-loader" }]
+      },
+      { 
+        test: /\.(eot|svg|ttf|woff|woff2)$/, 
+        use: "url-loader?name=[name].[ext]",
+        include: path.resolve(__dirname, 'node_modules'),
+      }
     ],
   },
   resolve: {

@@ -1,7 +1,7 @@
 {
   "name": "webviewer-ui",
   "author": "PDFTron Systems Inc.",
-  "version": "6.0.1",
+  "version": "6.0.2",
   "description": "WebViewer UI built in React",
   "main": "src/index.js",
   "scripts": {
@@ -83,6 +83,7 @@
     "sass-loader": "^8.0.0",
     "style-loader": "^1.0.1",
     "svg-inline-loader": "^0.8.0",
+    "url-loader": "^3.0.0",
     "webpack": "^4.41.2",
     "webpack-bundle-analyzer": "^3.6.0",
     "webpack-cli": "^3.3.10",
