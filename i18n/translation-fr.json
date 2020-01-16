@@ -85,7 +85,8 @@
     "calibration": "Étalonnage",
     "bookmarkPage": "Page",
     "bookmarksPanel": "Signets",
-    "newBookmark": "Nouveau signet"
+    "newBookmark": "Nouveau signet",
+    "documentTreePanel": "Documents"
   },
   "message": {
     "badDocument": "Échec du chargement du document. Le document est corrompu ou non valide.",

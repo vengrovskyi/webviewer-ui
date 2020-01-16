@@ -85,7 +85,8 @@
     "calibration": "Kalibrierung",
     "newBookmark": "Neues Lesezeichen",
     "bookmarkPage": "Seite",
-    "bookmarksPanel": "Lesezeichen"
+    "bookmarksPanel": "Lesezeichen",
+    "documentTreePanel": "Documents"
   },
   "message": {
     "badDocument": "Fehler beim Laden des Dokuments. Das Dokument ist entweder defekt oder ungültig.",

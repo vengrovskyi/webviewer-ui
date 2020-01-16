@@ -85,7 +85,8 @@
     "calibration": "구경 측정",
     "bookmarkPage": "페이지",
     "bookmarksPanel": "북마크",
-    "newBookmark": "새로운 북마크"
+    "newBookmark": "새로운 북마크",    
+    "documentTreePanel": "Documents"
   },
   "message": {
     "badDocument": "문서를 로드하지 못했습니다. 문서가 손상되었거나 유효하지 않습니다.",

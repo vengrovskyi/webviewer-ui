@@ -85,7 +85,8 @@
     "calibration": "Calibração",
     "bookmarkPage": "Página",
     "bookmarksPanel": "Favoritos",
-    "newBookmark": "Novo marcador"
+    "newBookmark": "Novo marcador",    
+    "documentTreePanel": "Documents"
   },
   "message": {
     "badDocument": "Falha ao carregar documento. O documento está corrompido ou não é válido.",

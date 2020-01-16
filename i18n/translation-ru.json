@@ -85,7 +85,8 @@
     "calibration": "калибровка",
     "bookmarksPanel": "закладки",
     "newBookmark": "Новая закладка",
-    "bookmarkPage": "страница"
+    "bookmarkPage": "страница",    
+    "documentTreePanel": "Documents"
   },
   "message": {
     "badDocument": "Произошла ошибка при загрузке документа. Документ содержит ошибки или недостоверный.",

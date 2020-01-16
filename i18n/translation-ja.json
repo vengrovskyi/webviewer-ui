@@ -85,7 +85,8 @@
     "calibration": "較正",
     "bookmarksPanel": "しおり",
     "newBookmark": "新しいブックマーク",
-    "bookmarkPage": "ページ"
+    "bookmarkPage": "ページ",    
+    "documentTreePanel": "Documents"
   },
   "message": {
     "badDocument": "ドキュメントの読み込みに失敗しました。ドキュメントが破損しているか、無効です。",

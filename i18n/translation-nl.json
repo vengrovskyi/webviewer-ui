@@ -85,7 +85,8 @@
     "calibration": "ijking",
     "newBookmark": "Nieuwe bladwijzer",
     "bookmarksPanel": "bladwijzers",
-    "bookmarkPage": "Pagina"
+    "bookmarkPage": "Pagina",    
+    "documentTreePanel": "Documents"
   },
   "message": {
     "badDocument": "Er is een fout opgetreden bij het laden van het document. Het document is corrupt of heeft een ongeldige indeling.",

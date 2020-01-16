@@ -85,7 +85,8 @@
     "calibration": "Calibración",
     "newBookmark": "Nuevo marcador",
     "bookmarksPanel": "Marcadores",
-    "bookmarkPage": "Página"
+    "bookmarkPage": "Página",
+    "documentTreePanel": "Documents"
   },
   "message": {
     "badDocument": "Error al cargar el documento. El documento está dañado o no es válido.",

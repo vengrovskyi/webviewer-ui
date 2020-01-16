@@ -85,7 +85,8 @@
     "calibration": "校准",
     "bookmarksPanel": "书签",
     "bookmarkPage": "页",
-    "newBookmark": "新书签"
+    "newBookmark": "新书签",    
+    "documentTreePanel": "Documents"
   },
   "message": {
     "badDocument": "无法加载文档，此文档已损坏或无效。",

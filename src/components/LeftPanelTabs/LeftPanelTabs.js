@@ -74,7 +74,7 @@ class LeftPanelTabs extends React.Component {
         <Button
           isActive={this.isActive('bookmarksPanel')}
           dataElement="documentTreePanelButton"
-          img="ic_bookmarks_black_24px"
+          img="ic_outline_black_24px"
           onClick={() => setActiveLeftPanel('documentTreePanel')}
           title="component.documentTreePanel"
         />

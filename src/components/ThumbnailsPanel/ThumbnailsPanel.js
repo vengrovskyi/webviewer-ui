@@ -195,7 +195,7 @@ class ThumbnailsPanel extends React.PureComponent {
     let numberOfColumns;
     //alert("innerWidth:"+innerWidth+" desktopBreakPoint:"+desktopBreakPoint+" THUMBNAIL_SIZE:"+THUMBNAIL_SIZE);
     if (innerWidth >= desktopBreakPoint) {
-      numberOfColumns = 2;
+      numberOfColumns = 1;
     // TODO: use forwardRef to get the width of the thumbnail div instead of using the magic 20px
     } else if (innerWidth >= 3 * (THUMBNAIL_SIZE + 20)) {
       numberOfColumns = 3;

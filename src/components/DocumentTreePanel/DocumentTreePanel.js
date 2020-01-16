@@ -10,7 +10,13 @@ import selectors from 'selectors';
 import actions from 'actions';
 
 import TreeView from 'devextreme-react/tree-view';
-import SelectBox from 'devextreme-react/select-box';
+import { Tooltip } from 'devextreme-react/tooltip';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFolder } from '@fortawesome/free-solid-svg-icons'
+import { faFilePdf } from '@fortawesome/free-solid-svg-icons'
+import { faFileAlt } from '@fortawesome/free-solid-svg-icons'
+import { faClipboardList } from '@fortawesome/free-solid-svg-icons'
 
 import { products } from './data.js';
 
@@ -24,7 +30,7 @@ class DocumentTreePanel extends React.PureComponent {
     this.listRef = React.createRef();
     this.settings = {
       value: 'contains',
-      treeData: products //[]
+      treeData: []//products //
     };
    }
 
@@ -91,15 +97,29 @@ class DocumentTreePanel extends React.PureComponent {
 
   selectItem(e) {
     let currentItem= Object.assign({}, e.itemData);
-    currentItem.documentUrl = "https://pdftron.s3.amazonaws.com/downloads/pl/demo-annotated.pdf";
-    currentItem.documentExtension = "pdf"
+    //currentItem.documentUrl = "https://pdftron.s3.amazonaws.com/downloads/pl/demo-annotated.pdf";
+    // currentItem.objectUrl = "https://www.pdftron.com/"
+    // currentItem.documentExtension = "pdf"
     if(currentItem.documentUrl){
       window.readerControl.loadDocument(currentItem.documentUrl, {extension: currentItem.documentExtension})
+    }else if(currentItem.objectUrl){
+      window.open(currentItem.objectUrl, "_blank");
     }
   }
 
   renderTreeViewItem(value) {
-    return (<div><img src={(value.icon ? ` ($${value.icon})` : '')} />{value.text}</div>);
+    if(value.type == 1){//Folder
+      return (<div id={value.id}><FontAwesomeIcon icon={faFolder} /> {value.text}</div>);//<Tooltip target={('#'+value.id)} visible={false} closeOnOutsideClick={false}><div>ExcelRemote IR</div></Tooltip>
+    } else if(value.type == 2){//PDF file
+      return (<div><FontAwesomeIcon icon={faFilePdf} /> {value.text}</div>);
+    } else if(value.type == 3){//Object Document
+      return (<div><FontAwesomeIcon icon={faFileAlt} /> {value.text}</div>);
+    } else if(value.type == 4){//History
+      return (<div><FontAwesomeIcon icon={faClipboardList} /> {value.text}</div>);
+    }
+    else{
+      return (<div>{value.text}</div>);      
+    }
   }
 }
 

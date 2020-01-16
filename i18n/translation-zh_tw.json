@@ -85,7 +85,8 @@
     "calibration": "校準",
     "bookmarksPanel": "書籤",
     "bookmarkPage": "頁",
-    "newBookmark": "新書籤"
+    "newBookmark": "新書籤",    
+    "documentTreePanel": "Documents"
   },
   "message": {
     "badDocument": "無法載入文件。此文件已損壞或無效。",
