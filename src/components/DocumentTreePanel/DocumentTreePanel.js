@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { List } from 'react-virtualized';
 import Measure from 'react-measure';
 import classNames from 'classnames';
-
+import { useDispatch, useSelector } from 'react-redux';
 import core from 'core';
 import selectors from 'selectors';
 import actions from 'actions';
@@ -23,8 +23,10 @@ import { products } from './data.js';
 import './DocumentTreePanel.scss';
 import 'devextreme/dist/css/dx.common.css';
 import 'devextreme/dist/css/dx.light.css';
+
 class DocumentTreePanel extends React.PureComponent {
 
+  
   constructor() {
     super();
     this.listRef = React.createRef();
@@ -32,6 +34,8 @@ class DocumentTreePanel extends React.PureComponent {
       value: 'contains',
       treeData: []//products //
     };
+
+    
    }
 
   componentDidMount() {
@@ -49,6 +53,7 @@ class DocumentTreePanel extends React.PureComponent {
   }
 
   onViewerLoaded = () => {
+
     let customDataString = window.readerControl.getCustomData()
     if(customDataString!=null){
       let customData = JSON.parse(customDataString);
@@ -97,11 +102,20 @@ class DocumentTreePanel extends React.PureComponent {
 
   selectItem(e) {
     let currentItem= Object.assign({}, e.itemData);
-    //currentItem.documentUrl = "https://pdftron.s3.amazonaws.com/downloads/pl/demo-annotated.pdf";
+    // currentItem.documentUrl = "https://pdftron.s3.amazonaws.com/downloads/pl/demo-annotated.pdf";
     // currentItem.objectUrl = "https://www.pdftron.com/"
     // currentItem.documentExtension = "pdf"
-    if(currentItem.documentUrl){
-      window.readerControl.loadDocument(currentItem.documentUrl, {extension: currentItem.documentExtension})
+    // currentItem.errorMessage = "Some error message";
+    if(currentItem.errorMessage){
+      let warning = {
+        message: currentItem.errorMessage,
+        title: "Warning.",
+        confirmBtnText: "Ok",
+        onConfirm: () => Promise.resolve(),
+      };
+      window.readerControl.showWarningMessage(warning);
+    }else if(currentItem.documentUrl){
+      window.readerControl.loadDocument(currentItem.documentUrl, {extension: currentItem.documentExtension});
     }else if(currentItem.objectUrl){
       window.open(currentItem.objectUrl, "_blank");
     }
@@ -109,7 +123,7 @@ class DocumentTreePanel extends React.PureComponent {
 
   renderTreeViewItem(value) {
     if(value.type == 1){//Folder
-      return (<div id={value.id}><FontAwesomeIcon icon={faFolder} /> {value.text}</div>);//<Tooltip target={('#'+value.id)} visible={false} closeOnOutsideClick={false}><div>ExcelRemote IR</div></Tooltip>
+      return (<div><FontAwesomeIcon icon={faFolder} /> {value.text}</div>);//<Tooltip target={('#'+value.id)} visible={false} closeOnOutsideClick={false}><div>ExcelRemote IR</div></Tooltip>
     } else if(value.type == 2){//PDF file
       return (<div><FontAwesomeIcon icon={faFilePdf} /> {value.text}</div>);
     } else if(value.type == 3){//Object Document
