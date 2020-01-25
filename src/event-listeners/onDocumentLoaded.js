@@ -64,6 +64,5 @@ export default dispatch => () => {
 
   window.readerControl.loadedFromServer = false;
   window.readerControl.serverFailed = false;
-
   fireEvent('documentLoaded');
 };

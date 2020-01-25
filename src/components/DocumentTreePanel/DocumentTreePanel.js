@@ -115,7 +115,7 @@ class DocumentTreePanel extends React.PureComponent {
       };
       window.readerControl.showWarningMessage(warning);
     }else if(currentItem.documentUrl){
-      window.readerControl.loadDocument(currentItem.documentUrl, {extension: currentItem.documentExtension});
+      window.readerControl.loadDocument(currentItem.documentUrl, {extension: currentItem.documentExtension, filename: currentItem.text});
     }else if(currentItem.objectUrl){
       window.open(currentItem.objectUrl, "_blank");
     }
