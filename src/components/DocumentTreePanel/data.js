@@ -16,36 +16,51 @@ export const products = [{
           id: '1_1_1_1',
           type: 2,
           text: 'HD Video Player',
-          price: 220
+          price: 220,
+          extension: 'pdf'
         }, {
           id: '1_1_1_2',
           type: 3,
           text: 'SuperHD Video Player',
-          price: 270
+          price: 270,
+          extension: 'pdf'
         }]
       }, {
         id: '1_1_2',
+        type: 5,
+        objectUrl: 'https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Statements/switch',
         text: 'Televisions',
         items: [{
           id: '1_1_2_1',
+          type: 4,
+          extension: 'png',
           text: 'SuperLCD 42',
           price: 1200
         }, {
           id: '1_1_2_2',
+          type: 4,
+          extension: 'docx',
           text: 'SuperLED 42',
           price: 1450
         }, {
           id: '1_1_2_3',
+          type: 4,
+          extension: 'xlsx',
           text: 'SuperLED 50',
           price: 1600
         }, {
           id: '1_1_2_4',
+          type: 4,
+          extension: 'raw',
           text: 'SuperLCD 55',
           price: 1350
         }, {
           id: '1_1_2_5',
+          type: 6,
+          errorMessage: 'Some error',
           text: 'SuperLCD 70',
-          price: 4000
+          price: 4000,
+          extension: 'pdf'
         }]
       }, {
         id: '1_1_3',
