@@ -53,6 +53,8 @@ class DocumentTreePanel extends React.PureComponent {
     core.addEventListener('finishedRendering', this.onFinishedRendering);
     window.addEventListener('resize', this.onWindowResize);
     window.addEventListener('viewerLoaded', this.onViewerLoaded);
+    window.addEventListener('documentLoaded', this.onDocumentLoaded);
+    window.addEventListener('documentUnloaded', this.onDocumentUnloaded);
   }
 
   componentWillUnmount() {
@@ -60,6 +62,9 @@ class DocumentTreePanel extends React.PureComponent {
     core.removeEventListener('finishedRendering', this.onFinishedRendering);
     window.removeEventListener('resize', this.onWindowResize);
     window.removeEventListener('viewerLoaded', this.onViewerLoaded);
+    window.removeEventListener('documentLoaded', this.onDocumentLoaded);
+    window.removeEventListener('documentUnloaded', this.onDocumentUnloaded);
+    
   }
 
   onViewerLoaded = () => {
@@ -76,10 +81,17 @@ class DocumentTreePanel extends React.PureComponent {
 
         this.settings.treeData = customData.documentTree; 
         this.settings.allowFilesDownload = customData.allowFilesDownload; 
-        debugger;
       }
     }
   }
+
+  onDocumentLoaded = () => {
+  window.readerControl.openElements(['leftPanel']);
+  }
+
+  onDocumentUnloaded = () => {
+    window.readerControl.openElements(['leftPanel']);
+    }
 
   onBeginRendering = () => {
 
@@ -108,15 +120,13 @@ class DocumentTreePanel extends React.PureComponent {
 
   onSelectItem = (e) => {
     let selectedItem = this.documentTreeItemsMap.get(e.target.id);
-    // }else if(currentItem.objectUrl){
-    //   window.open(currentItem.objectUrl, "_blank");
-    // }
 
     switch(selectedItem.type){
       case 2:
       case 5: {
         if(selectedItem.documentUrl){
             window.readerControl.loadDocument(selectedItem.documentUrl, {extension: selectedItem.documentExtension, filename: selectedItem.text});
+            
           }
         break;
       }
