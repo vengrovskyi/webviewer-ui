@@ -125,8 +125,11 @@ class DocumentTreePanel extends React.PureComponent {
       case 2:
       case 5: {
         if(selectedItem.documentUrl){
-            window.readerControl.loadDocument(selectedItem.documentUrl, {extension: selectedItem.documentExtension, filename: selectedItem.text});
-            
+            if(selectedItem.useStreaming!=undefined && selectedItem.useStreaming!=null){
+              window.readerControl.loadDocument(selectedItem.documentUrl, {extension: selectedItem.documentExtension, streaming: selectedItem.useStreaming});
+            }else{
+              window.readerControl.loadDocument(selectedItem.documentUrl, {extension: selectedItem.documentExtension});
+            }
           }
         break;
       }
