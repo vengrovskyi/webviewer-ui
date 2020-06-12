@@ -32,8 +32,8 @@ class DocumentTreePanel extends React.PureComponent {
     this.listRef = React.createRef();
     this.settings = {
       value: 'contains',
-      treeData: [],  //products
-      allowFilesDownload: false//true
+      treeData:[] ,  //products
+      allowFilesDownload:false //true
     };
     this.documentTreeItemsMap = new Map();
 
@@ -118,8 +118,24 @@ class DocumentTreePanel extends React.PureComponent {
     }
   }
 
+  getAttrInParent = (element, attributeName)=>{
+    let attrValue = null;
+    if(element){
+      attrValue = element.attributes.getNamedItem(attributeName);
+      if(!attrValue)
+      {
+        attrValue = this.getAttrInParent(element.parentElement, attributeName);
+      }      
+    }
+    return attrValue;
+  }
+
   onSelectItem = (e) => {
-    let selectedItem = this.documentTreeItemsMap.get(e.target.id);
+    let itemId = e.target.id;
+    if(!itemId){
+      itemId = e.target.parentElement.id;
+    }
+    let selectedItem = this.documentTreeItemsMap.get(itemId);
 
     switch(selectedItem.type){
       case 2:
@@ -131,6 +147,16 @@ class DocumentTreePanel extends React.PureComponent {
               window.readerControl.loadDocument(selectedItem.documentUrl, {extension: selectedItem.documentExtension});
             }
           }
+        break;
+      }
+      case 3: {
+        let warning = {
+          message: "Document is not converted.",
+          title: "Warning.",
+          confirmBtnText: "Ok",
+          onConfirm: () => Promise.resolve(),
+        };
+        window.readerControl.showWarningMessage(warning);
         break;
       }
       case 4: {
@@ -158,10 +184,12 @@ class DocumentTreePanel extends React.PureComponent {
     }
   }
   
+
+
   onDownloadClick = (e) => {
     let itemId = e.target.attributes.getNamedItem("itemId");
     if(!itemId){
-      itemId = e.target.parentElement.attributes.getNamedItem("itemId")
+      itemId = this.getAttrInParent( e.target.parentElement,"itemId");
     }
     if(itemId){
       let selectedItem = this.documentTreeItemsMap.get(itemId.value);
@@ -200,48 +228,22 @@ class DocumentTreePanel extends React.PureComponent {
 
   renderTreeViewItem = (value) => {
     if(value.type == 0){//Unexpected value
-      return (<div id={value.id}><FontAwesomeIcon icon={faFileAlt} /> {value.text}</div>);//<Tooltip target={('#'+value.id)} visible={false} closeOnOutsideClick={false}><div>ExcelRemote IR</div></Tooltip>
+      return (<div id={value.id}><FontAwesomeIcon icon={faFileAlt} /> {value.text}</div>);
     } else if(value.type == 1){//Folder
-      return (<div id={value.id}><FontAwesomeIcon icon={faFolder} /> {value.text}</div>);//<Tooltip target={('#'+value.id)} visible={false} closeOnOutsideClick={false}><div>ExcelRemote IR</div></Tooltip>
+      return (<div id={value.id}><FontAwesomeIcon icon={faFolder} /> {value.text}</div>);
     } else if(value.type == 2){//Viewable file (pdf or xod)
-      debugger;
       if(this.settings.allowFilesDownload){
         return (<div><span id={value.id} onClick={this.onSelectItem}><FontAwesomeIcon icon={faFilePdf} /> {value.text}</span><span itemID={value.id} onClick={this.onDownloadClick} title='Download'>  <FontAwesomeIcon icon={faFileDownload}/></span></div>);
       }else{
         return (<div id={value.id} onClick={this.onSelectItem}><FontAwesomeIcon icon={faFilePdf} /> {value.text}</div>);
       }
-      
     } else if(value.type == 3){//Non converted file
-      return (<div id={value.id} onClick={this.onSelectItem}><FontAwesomeIcon icon={faFilePdf} /><span style={{color:"gray"}}> {value.text}</span></div>);
-    } else if(value.type == 4){//File that can be downloaded (set icons for each of known extension)
+      return (<div id={value.id} onClick={this.onSelectItem}><FontAwesomeIcon icon={faFilePdf} /><span style={{color:"gray", fontStyle:"italic"}}> {value.text}</span></div>);
+    } else if(value.type == 4){//File that can be downloaded not viewed (set icons for each of known extension)
       if(this.settings.allowFilesDownload){
-        switch(value.extension){
-          case 'doc':
-          case 'docx': return (<div><span id={value.id} onClick={this.onSelectItem}><FontAwesomeIcon icon={faFileWord} /> {value.text}</span><span itemID={value.id} onClick={this.onDownloadClick} title='Download'>  <FontAwesomeIcon icon={faFileDownload}/></span></div>);
-          case 'xls':
-          case 'xlsx': return (<div><span id={value.id} onClick={this.onSelectItem}><FontAwesomeIcon icon={faFileExcel} /> {value.text}</span><span itemID={value.id} onClick={this.onDownloadClick} title='Download'>  <FontAwesomeIcon icon={faFileDownload}/></span></div>); 
-          case 'tif':
-          case 'tiff':
-          case 'bmp':
-          case 'jpg':
-          case 'jpeg':
-          case 'png': return (<div><span id={value.id} onClick={this.onSelectItem}><FontAwesomeIcon icon={faFileImage} /> {value.text}</span><span itemID={value.id} onClick={this.onDownloadClick} title='Download'>  <FontAwesomeIcon icon={faFileDownload}/></span></div>);
-          default : return (<div><span id={value.id} onClick={this.onSelectItem}><FontAwesomeIcon icon={faFile} /> {value.text}</span><span itemID={value.id} onClick={this.onDownloadClick} title='Download'>  <FontAwesomeIcon icon={faFileDownload}/></span></div>);         
-        }
+        return (<div><span id={value.id} onClick={this.onSelectItem} style={{fontWeight: "bold", fontStyle:"italic"}}><FontAwesomeIcon icon={faFile} /> {value.text}</span><span itemID={value.id} onClick={this.onDownloadClick} title='Download'>  <FontAwesomeIcon icon={faFileDownload}/></span></div>);         
       }else{
-        switch(value.extension){
-          case 'doc':
-          case 'docx': return (<div id={value.id} onClick={this.onSelectItem}><FontAwesomeIcon icon={faFileWord} /> {value.text}</div>);
-          case 'xls':
-          case 'xlsx': return (<div id={value.id} onClick={this.onSelectItem}><FontAwesomeIcon icon={faFileExcel} /> {value.text}</div>); 
-          case 'tif':
-          case 'tiff':
-          case 'bmp':
-          case 'jpg':
-          case 'jpeg':
-          case 'png': return (<div id={value.id} onClick={this.onSelectItem}><FontAwesomeIcon icon={faFileImage} /> {value.text}</div>);
-          default : return (<div id={value.id} onClick={this.onSelectItem}><FontAwesomeIcon icon={faFile} /> {value.text}</div>);         
-        }
+        return (<div><span id={value.id} onClick={this.onSelectItem} style={{fontWeight: "bold", fontStyle:"italic"}}><FontAwesomeIcon icon={faFile} /> {value.text}</span></div>);         
       }
       
     } else if(value.type == 5){//Document object
